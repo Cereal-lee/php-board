@@ -1,6 +1,7 @@
 <?php
 	include_once("./_common.php");
 	include "./session.php";
+	include "./connectDB.php";
 ?>
 
 <!DOCTYPE html>
@@ -18,24 +19,23 @@
 <?php
 	include "./common/header.php";
 ?>
+
 <section>
-<h3> link list </h3>
-	<?php
-		if(!isset($_SESSION['myMemberID'])){
-	?>
-	<ul>
-		<li><a href = "./regist.php">회원가입</a></li><br>
-		<li><a href = "./login.php">로그인</a></li><br>
-		<li><a href = "./board_list.php">게시판</a></li><br>
-	<?php
-		}else{
-	?>
-		<li><a href = "./logout.php">로그아웃</a></li><br>
-	<?php
-		}
-	?>
-	</ul>
+	<form name = "write" method = "POST" action = "./board_save.php" enctype="multipart/form-data">
+		 제목
+		 <br><br>
+		 <input type = "text" name = "title" required/>
+		 <br><br>
+		 내용
+		 <br><br>
+		 <textarea name = "content" cols = "80" rows = "10" required></textarea>
+		 <br><br>
+		 <input type = "file" name = "image"/>
+		 <br><br>
+		 <input type = "submit" value = "저장" />
+	</form>
 </section>
+
 <?php
 	include "./common/footer.html";
 ?>
