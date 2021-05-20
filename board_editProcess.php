@@ -63,44 +63,29 @@
 		exit;
 	}
 
-
-
-
+	$page = $_POST['page'];
+	$boardID = $_POST['boardID'];
 	$title = $_POST['title'];
 	$content = $_POST['content'];
 	$image = $target_file;
 	$nickname = $_POST['nickname'];
 	$password = $_POST['password'];
-	$myMemberID = $_POST['myMemberID'];
 	$regTime = time();
 
-	if($myMemberID != 0){
-		
-		$sql = "INSERT INTO seum_php200_board (nickname, password, title, content, regTime, image , myMemberID) ";
-		$sql .= "VALUES ('{$nickname}', '{$password}', '{$title}', '{$content}', {$regTime} ,'{$image}' , '{$myMemberID}')";
-		$res = $dbConnect -> query($sql);
+	if(isset($_SESSION['nickname'])){
+		$nickname = $_SESSION['nickname'];
+	}
 
-		if($res){
-			Header("Location:./board_list.php");
-		}
-		else{
-			echo "ERROR";
-			exit;
-		}
+	$sql = "UPDATE seum_php200_board SET title = '{$title}' , content = '{$content}' , image = '{$image}' , nickname = '{$nickname}' , password = '{$password}' , regTime = '{$regTime}'";
+	$sql .= "WHERE boardID = '{$boardID}'";
+	$res = $dbConnect -> query($sql);
+
+	if($res){
+		Header("Location:./board_view.php?boardID={$boardID}&&page={$page}");
 	}
 	else{
-		$sql = "INSERT INTO seum_php200_board (nickname, password, title, content, regTime, image) ";
-		$sql .= "VALUES ('{$nickname}', '{$password}', '{$title}', '{$content}', {$regTime} ,'{$image}')";
-		$res = $dbConnect -> query($sql);
-
-		if($res){
-			Header("Location:./board_list.php");
-		}
-		else{
-			echo "ERROR";
-			exit;
-		}
+		echo "ERROR";
+		exit;
 	}
-
 
 ?>
