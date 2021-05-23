@@ -22,13 +22,15 @@
 <body>
 <?php
 	include "./common/header.php";
+	
 ?>
 
 <h2>로그인</h2>
-	<form name = "login" method = "POST" action = "./login_processing.php">
+	<form name = "login" method = "POST" action = "./board_ps.php">
+		
 		아이디<br><input type = "text" name = "userID" placeholder = "아이디 입력" required /><br><br>
 		비밀번호<br><input type = "password" name = "password" placeholder = "비밀번호 입력" required /><br><br>
-		
+		<input type = "hidden" name = "mode" value = "login" />
 		<input type = "submit" value = "로그인"/>
 	</form>
 
