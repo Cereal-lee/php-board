@@ -32,11 +32,20 @@
 			//검색 옵션
 				$searchKeyword = $_GET["searchKeyword"];
 				$searchOption = $_GET["option"];
+
+				$optionTitle = '';
+				$optionContent = '';
+				$optionTorc = '';
 		
 				switch ($searchOption){
 					case 'title':
+						$optionTitle = 'selected';
+						break;
 					case 'content':
+						$optionContent = 'selected';
+						break;
 					case 'torc':
+						$optionTorc = 'selected';
 						break;
 					default:
 						$searchOption = NULL;
@@ -190,11 +199,11 @@
 		?>
 	</div>
 	<form name = "search" style ="text-align: center;" method = "GET" action = "./board_list.php">
-		<input type = "text" name = "searchKeyword" placeholder = "검색어 입력" required/>
+		<input type = "text" name = "searchKeyword" placeholder = "검색어 입력" value = "<?=$searchKeyword ?>" required/>
 		<select name = "option" required>
-			<option value = "title">제목</option>
-			<option value = "content">내용</option>
-			<option value = "torc">제목 또는 내용</option>
+			<option value = "title" <?=$optionTitle ?> >제목</option>
+			<option value = "content" <?=$optionContent ?> >내용</option>
+			<option value = "torc" <?=$optionTorc ?> >제목 또는 내용</option>
 		</select>
 		<input type = "submit" value = "검색" />
 	</form>
